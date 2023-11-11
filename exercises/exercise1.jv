@@ -38,7 +38,7 @@ pipeline AirportPipeline {
 	}
 
     AirportDataExtractor
-		-> Interpreter
+	-> Interpreter
         -> CSVInterpreter
         -> TablesInterpreter
         -> Loader;
