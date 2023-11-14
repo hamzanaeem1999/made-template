@@ -30,8 +30,7 @@ pipeline AirportPipeline {
 			"column_11" oftype text,
 			"column_12" oftype text,
 			"geo_punkt" oftype text,
-
-		];
+];
 	}
 // Loader, SQLite file
 	block Loader oftype SQLiteLoader {
