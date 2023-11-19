@@ -28,7 +28,6 @@ def load(df, table):
     with engine.connect() as connection:
         df.to_sql(table, connection, if_exists="replace")
 def main():
-    
 #   First CSV
     weather_data_munich = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/retrievebulkdataset?&key=T86CZSABGBBZ3ELJMZ44JRUET&taskId=337723d75a8b19339b3bc507223c7cc6&zip=false"
 #   Extract
