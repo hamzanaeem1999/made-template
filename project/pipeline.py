@@ -54,7 +54,7 @@ def main():
 
 # To run the bike traffic data csv below, you need to follow below steps:
 # 1) Create a Kaggle Account:
-#       If you don't have a Kaggle account, you'll need to create one.
+#       If you don't have a Kaggle account, you'll need to create one, also install Kaggle API.
 
 # 2) Enable Kaggle API:
 #      Log in to your Kaggle account.
