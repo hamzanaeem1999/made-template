@@ -46,16 +46,13 @@ def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     data_dir = os.path.join(script_dir, "..", "data")
     weather_data_munich = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/retrievebulkdataset?&key=T86CZSABGBBZ3ELJMZ44JRUET&taskId=337723d75a8b19339b3bc507223c7cc6&zip=false"
-#   Extract
     after_reading_weather_csv = extract(weather_data_munich)
     drop_weather_columns = ['name', 'snow', 'windgust','preciptype', 'precip','precipprob','severerisk', 'sunrise',
                     'sunset','moonphase','precipcover','description',"icon","stations","visibility"]
-#   Transform
     refined_weather_data = transform(after_reading_weather_csv, drop_weather_columns, key="munich_weather")
-#   Load
     load(refined_weather_data, "table_1")
 
-# To run the traffic data csv below, you need to follow below steps:
+# To run the bike traffic data csv below, you need to follow below steps:
 # 1) Create a Kaggle Account:
 #       If you don't have a Kaggle account, you'll need to create one.
 
@@ -68,20 +65,14 @@ def main():
 
 # 3) Place the downloaded kaggle.json file in a directory on your machine.
     
-    
-#   Second CSV
     download_kaggle_dataset('lucafrance/bike-traffic-in-munich', data_dir, 'rad_15min.csv')
     bike_traffic_data = os.path.join(data_dir, 'rad_15min.csv')
 
-#   Extract
     after_reading_bike_traffic_csv = extract(bike_traffic_data)  
-#   Transform
     drop_bike_columns = ['richtung_1','uhrzeit_ende','uhrzeit_start','richtung_2']
     refined_bike_traffic_data = transform(after_reading_bike_traffic_csv, drop_bike_columns,  key="bike_traffic")
-#   Load
     load(refined_bike_traffic_data, "table_2")
 if __name__ == "__main__":
     main()
-    
 # When you want to run pipeline.sh you just have to run like this command on linux: ./pipeline.sh in the same
 # directory, if you don't do you then have to paste whole path to run this command
