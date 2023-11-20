@@ -63,7 +63,7 @@ def main():
 #      This will download a file named kaggle.json to your computer.
 #      Store Kaggle API Key:
 
-# 3) Place the downloaded kaggle.json file in a directory on your machine.
+# 3) Place the downloaded kaggle.json file in a directory named as .kaggle on your machine.
     
     download_kaggle_dataset('lucafrance/bike-traffic-in-munich', data_dir, 'rad_15min.csv')
     bike_traffic_data = os.path.join(data_dir, 'rad_15min.csv')
