@@ -6,7 +6,6 @@ def extract_csv(data_path):
     df = pd.read_csv(data_path, sep=';', low_memory=False)
     return df
 
-
 # Transform the data under guidelines mentioned by professor in document
 def transform_data(data):
     # 1) Drop the "Status" column
