@@ -4,7 +4,7 @@ pipeline Vehicle_Flow
     {url: "https://www-genesis.destatis.de/genesis/downloads/00/tables/46251-0021_00.csv";}
 
 	block encoding_decoder oftype TextFileInterpreter 
-    {encoding: "utf8";}
+    {encoding: "latin2";}
 
 	block line_range_defining oftype TextRangeSelector 
 	{lineFrom: 7; lineTo: 483;}
