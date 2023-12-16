@@ -23,12 +23,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r project/requirements.txt
 
-      # - name: Install Kaggle API
-      #   run: 
-      #     mkdir -p ~/.kaggle
-      #     echo "$KAGGLE_TOKEN" > ~/.kaggle/kaggle.json 
-      #     chmod 600 ~/.kaggle/kaggle.json
-
       - name: Run pipline.py
         run: python project/pipeline.py
         
