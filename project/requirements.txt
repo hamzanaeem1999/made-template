@@ -1,5 +1,4 @@
 kaggle
-os
 sqlalchemy
 pandas
 zipfile
