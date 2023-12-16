@@ -58,15 +58,15 @@ def download_kaggle_dataset(dataset, target_folder, filename):
 
     # Attempt to access 'Content-Length' header and handle errors
     try:
-        content_length = int(response.headers['Content-Length'])
-        print(f"Downloaded {filename} ({content_length} bytes)")
-    except KeyError:
-        print(f"Error: 'Content-Length' header not found in the response.")
+        content_length = int(response.headers.get('Content-Length', 0))
+        if content_length > 0:
+            print(f"Downloaded {filename} ({content_length} bytes)")
+        else:
+            print(f"Error: 'Content-Length' header is zero or not present in the response.")
     except ValueError:
         print(f"Error: Unable to convert 'Content-Length' to an integer.")
 
 # Rest of your code...
-
 
 
 def main():
