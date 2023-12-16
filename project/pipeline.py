@@ -32,14 +32,41 @@ def load(df, table):
         df.to_sql(table, connection, if_exists="replace")
       
     
+# def download_kaggle_dataset(dataset, target_folder, filename):
+#     api = KaggleApi()
+#     api.authenticate()
+#     username, dataset_name = dataset.split('/')[-2:]
+#     zip_file_path = os.path.join(target_folder,f"{dataset_name}.zip")
+#     api.dataset_download_files(f"{username}/{dataset_name}", path=target_folder, unzip=False)
+#     with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+#         zip_ref.extract(filename, path=target_folder)
+        
 def download_kaggle_dataset(dataset, target_folder, filename):
     api = KaggleApi()
     api.authenticate()
     username, dataset_name = dataset.split('/')[-2:]
     zip_file_path = os.path.join(target_folder, f"{dataset_name}.zip")
-    api.dataset_download_files(f"{username}/{dataset_name}", path=target_folder, unzip=False)
+    
+    # Download dataset files
+    files = api.dataset_download_files(f"{username}/{dataset_name}", path=target_folder, unzip=False)
+
+    # Check if 'Content-Length' is present in the response headers
+    content_length = files.headers.get('Content-Length')
+    if content_length is not None:
+        size = int(content_length)
+    else:
+        size = None
+
+    # Extract downloaded files
     with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
         zip_ref.extract(filename, path=target_folder)
+
+    # Print or use size information as needed
+    if size is not None:
+        print(f"Downloaded file size: {size} bytes")
+    else:
+        print("File size information not available in headers.")
+
 
 
 def main():
