@@ -10,18 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      KAGGLE_USERNAME: ${{ secrets.KAGGLE_TOKEN_USERNAME }}
-      KAGGLE_KEY: ${{ secrets.KAGGLE_TOKEN_KEY }}
+      KAGGLE_USERNAME: hamzanaeem534
+      KAGGLE_KEY: 3cee859180d8b54a4a9e9f06177b5f26
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Print Environment Variables
-        run: |
-          echo "KAGGLE_USERNAME: $KAGGLE_USERNAME"
-          echo "KAGGLE_KEY: $KAGGLE_KEY"
-          
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
