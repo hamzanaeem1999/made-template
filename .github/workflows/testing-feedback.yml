@@ -24,7 +24,7 @@ jobs:
         run: pip install -r project/requirements.txt
 
       - name: Install Kaggle API
-        run: 
+        run: |
           pip install kaggle
           mkdir -p ~/.kaggle
           echo "$KAGGLE_TOKEN" > ~/.kaggle/kaggle.json 
