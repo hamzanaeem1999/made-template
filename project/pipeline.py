@@ -54,12 +54,13 @@ def download_kaggle_dataset(dataset, target_folder, filename):
     # Get the dataset URL
     dataset_url = api.dataset_download_files(f"{username}/{dataset_name}", path=target_folder, unzip=False, force=True)
 
-    # Download the dataset in chunks
+        # Download the dataset in chunks
     response = requests.get(dataset_url, stream=True)
     response.raise_for_status()
 
     # Get the total file size (if available)
-    total_size = int(response.headers.get('Content-Length', 0))
+    content_length_header = response.headers.get('Content-Length')
+    total_size = int(content_length_header) if content_length_header is not None and content_length_header.isdigit() else None
 
     # Download the file with a progress bar
     with open(zip_file_path, 'wb') as file, tqdm(
@@ -72,10 +73,6 @@ def download_kaggle_dataset(dataset, target_folder, filename):
         for data in response.iter_content(chunk_size=1024):
             size = file.write(data)
             bar.update(size)
-
-    # Extract downloaded files
-    with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
-        zip_ref.extract(filename, path=target_folder)
 
 
 def main():
