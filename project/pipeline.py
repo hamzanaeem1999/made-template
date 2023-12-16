@@ -26,7 +26,7 @@ def transform(df, drop_columns, key):
 
 def load(df, table):
     current_dir = os.getcwd()  # Get the current working directory
-    db_path = os.path.join(current_dir,".","data", "munich.sqlite")
+    db_path = os.path.join(current_dir,"..","data", "munich.sqlite")
     engine = create_engine(f"sqlite:///{db_path}")
     with engine.connect() as connection:
         df.to_sql(table, connection, if_exists="replace")
@@ -44,7 +44,7 @@ def download_kaggle_dataset(dataset, target_folder, filename):
 def main():
     
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    data_dir = os.path.join(script_dir, ".", "data")
+    data_dir = os.path.join(script_dir, "..", "data")
     weather_data_munich = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/retrievebulkdataset?&key=T86CZSABGBBZ3ELJMZ44JRUET&taskId=337723d75a8b19339b3bc507223c7cc6&zip=false"
     after_reading_weather_csv = extract(weather_data_munich)
     drop_weather_columns = ['name', 'snow', 'windgust','preciptype', 'precip','precipprob','severerisk', 'sunrise',
