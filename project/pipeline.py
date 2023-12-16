@@ -48,8 +48,12 @@ from tqdm import tqdm  # For progress bar
 def download_kaggle_dataset(dataset, target_folder, filename):
     print("directly.....", dataset)
     api = KaggleApi()
-    api.authenticate()
-    print('api autheticate',api )
+    try:
+        api.authenticate()
+        print("Authentication successful.")
+    except Exception as e:
+        print(f"Authentication failed: {e}")
+        return  # Exit the function if authentication fails    print('api autheticate',api )
     username, dataset_name = dataset.split('/')[-2:]
     print('user name , dataset name', username, dataset_name)
     zip_file_path = os.path.join(target_folder, f"{dataset_name}.zip")
