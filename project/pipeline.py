@@ -42,6 +42,8 @@ def load(df, table):
 #         zip_ref.extract(filename, path=target_folder)
         
 import requests
+import requests
+from tqdm import tqdm  # For progress bar
 
 def download_kaggle_dataset(dataset, target_folder, filename):
     api = KaggleApi()
@@ -49,17 +51,27 @@ def download_kaggle_dataset(dataset, target_folder, filename):
     username, dataset_name = dataset.split('/')[-2:]
     zip_file_path = os.path.join(target_folder, f"{dataset_name}.zip")
 
-    # Download dataset file using requests
-    response = api.dataset_download_files(f"{username}/{dataset_name}", path=target_folder, unzip=False, force=True, stream=True)
-    
-    # Check if the response was successful
+    # Get the dataset URL
+    dataset_url = api.dataset_download_files(f"{username}/{dataset_name}", path=target_folder, unzip=False, force=True)
+
+    # Download the dataset in chunks
+    response = requests.get(dataset_url, stream=True)
     response.raise_for_status()
 
-    # Download the file in chunks
-    with open(zip_file_path, 'wb') as f:
-        for chunk in response.iter_content(chunk_size=8192):
-            if chunk:
-                f.write(chunk)
+    # Get the total file size (if available)
+    total_size = int(response.headers.get('Content-Length', 0))
+
+    # Download the file with a progress bar
+    with open(zip_file_path, 'wb') as file, tqdm(
+        desc=filename,
+        total=total_size,
+        unit='B',
+        unit_scale=True,
+        unit_divisor=1024,
+    ) as bar:
+        for data in response.iter_content(chunk_size=1024):
+            size = file.write(data)
+            bar.update(size)
 
     # Extract downloaded files
     with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
