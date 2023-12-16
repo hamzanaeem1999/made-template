@@ -25,6 +25,7 @@ jobs:
 
       - name: Install Kaggle API
         run: 
+          pip install kaggle
           mkdir -p ~/.kaggle
           echo "$KAGGLE_TOKEN" > ~/.kaggle/kaggle.json 
           chmod 600 ~/.kaggle/kaggle.json
