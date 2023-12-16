@@ -32,29 +32,14 @@ def load(df, table):
         df.to_sql(table, connection, if_exists="replace")
       
     
-# def download_kaggle_dataset(dataset, target_folder, filename):
-#     api = KaggleApi()
-#     api.authenticate()
-#     username, dataset_name = dataset.split('/')[-2:]
-#     zip_file_path = os.path.join(target_folder, f"{dataset_name}.zip")
-#     api.dataset_download_files(f"{username}/{dataset_name}", path=target_folder, unzip=False)
-#     with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
-#         zip_ref.extract(filename, path=target_folder)
 def download_kaggle_dataset(dataset, target_folder, filename):
     api = KaggleApi()
     api.authenticate()
     username, dataset_name = dataset.split('/')[-2:]
     zip_file_path = os.path.join(target_folder, f"{dataset_name}.zip")
-
     api.dataset_download_files(f"{username}/{dataset_name}", path=target_folder, unzip=False)
-
     with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
         zip_ref.extract(filename, path=target_folder)
-
-    # Print information about the downloaded file
-    print(f"Downloaded {filename}")
-
-# Rest of your code...
 
 
 def main():
