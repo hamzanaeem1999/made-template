@@ -17,6 +17,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Print Environment Variables
+        run: |
+          echo "KAGGLE_USERNAME: $KAGGLE_USERNAME"
+          echo "KAGGLE_KEY: $KAGGLE_KEY"
+          
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
