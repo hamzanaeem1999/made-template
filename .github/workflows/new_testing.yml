@@ -1,59 +1,17 @@
-# name: My Workflow
-# on:
-#   push:
-#     branches:
-#       - main
-#     paths:
-#       - 'project/**'
-# jobs:
-#   build-and-test:
-#     runs-on: ubuntu-latest
-
-#     env:
-#       KAGGLE_USERNAME: ${{ secrets.KAGGLE_TOKEN_USERNAME }}
-#       KAGGLE_KEY: ${{ secrets.KAGGLE_TOKEN_KEY }}
-
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v2
-
-#       - name: Set up Python
-#         uses: actions/setup-python@v2
-#         with:
-#           python-version: '3.9.18'
-
-#       - name: Install dependencies
-#         run: pip install -r project/requirements.txt
-
-#       - name: Install Kaggle API
-#         run: |
-#           pip install kaggle
-#           mkdir -p $HOME/.kaggle
-#           echo "{\"username\":\"$KAGGLE_USERNAME\",\"key\":\"$KAGGLE_KEY\"}" > $HOME/.kaggle/kaggle.json
-#           chmod 600 $HOME/.kaggle/kaggle.json
-#           export KAGGLE_CONFIG_DIR=$HOME/.kaggle
-
-#       - name: Run pipeline.py
-#         run: python project/pipeline.py
-
-#       - name: Run test.py
-#         run: python project/test.py
 name: My Workflow
-
 on:
   push:
     branches:
       - main
     paths:
       - 'project/**'
-
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     env:
-      KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
-      KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+      KAGGLE_USERNAME: ${{ secrets.KAGGLE_TOKEN_USERNAME }}
+      KAGGLE_KEY: ${{ secrets.KAGGLE_TOKEN_KEY }}
 
     steps:
       - name: Checkout repository
@@ -62,7 +20,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.11'
+          python-version: '3.9.18'
 
       - name: Install dependencies
         run: pip install -r project/requirements.txt
