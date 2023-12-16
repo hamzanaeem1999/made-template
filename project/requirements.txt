@@ -1,5 +1,4 @@
 kaggle
 sqlalchemy
 pandas
-zipfile
 numpy
