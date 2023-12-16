@@ -46,9 +46,12 @@ import requests
 from tqdm import tqdm  # For progress bar
 
 def download_kaggle_dataset(dataset, target_folder, filename):
+    print("directly.....", dataset)
     api = KaggleApi()
     api.authenticate()
+    print('api autheticate',api )
     username, dataset_name = dataset.split('/')[-2:]
+    print('user name , dataset name', username, dataset_name)
     zip_file_path = os.path.join(target_folder, f"{dataset_name}.zip")
     
     # Download dataset files
