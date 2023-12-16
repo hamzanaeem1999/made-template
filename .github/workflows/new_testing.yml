@@ -9,6 +9,10 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+    env:
+      KAGGLE_USERNAME: ${{ secrets.KAGGLE_TOKEN_USERNAME }}
+      KAGGLE_KEY: ${{ secrets.KAGGLE_TOKEN_KEY }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -20,11 +24,6 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r project/requirements.txt
-
-      - name: Extract Kaggle Credentials
-        run: |
-          export KAGGLE_USERNAME=$(echo "$KAGGLE_TOKEN" | jq -r .username)
-          export KAGGLE_KEY=$(echo "$KAGGLE_TOKEN" | jq -r .key)
 
       - name: Install Kaggle API
         run: |
