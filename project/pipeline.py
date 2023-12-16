@@ -34,7 +34,7 @@ def load(df, table):
     
 def download_kaggle_dataset(dataset, target_folder, filename):
     api = KaggleApi()
-    api.authenticate(username="hamzanaeem534", key="3cee859180d8b54a4a9e9f06177b5f26")
+    api.authenticate()
     username, dataset_name = dataset.split('/')[-2:]
     zip_file_path = os.path.join(target_folder, f"{dataset_name}.zip")
     api.dataset_download_files(f"{username}/{dataset_name}", path=target_folder, unzip=False)
