@@ -26,7 +26,7 @@ def transform(df, drop_columns, key):
 
 def load(df, table):
     current_dir = os.getcwd()  # Get the current working directory
-    db_path = os.path.join(current_dir,"..","data", "munich.sqlite")
+    db_path = os.path.join(current_dir,".","data", "munich.sqlite")
     engine = create_engine(f"sqlite:///{db_path}")
     with engine.connect() as connection:
         df.to_sql(table, connection, if_exists="replace")
