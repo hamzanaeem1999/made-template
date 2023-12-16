@@ -43,15 +43,13 @@ def download_kaggle_dataset(dataset, target_folder, filename):
     
     # Check if 'Content-Length' header is present in the response
     response = api.dataset_view(f"{username}/{dataset_name}")
-    content_length = response.headers.get('Content-Length')
     
-    if content_length is not None:
-        size = int(content_length)
-        print(f"Downloaded {filename} ({size} bytes)")
-    else:
+    try:
+        content_length = int(response.headers['Content-Length'])
+        print(f"Downloaded {filename} ({content_length} bytes)")
+    except (KeyError, ValueError):
         print(f"Unable to determine file size for {filename}.")
 
-# Rest of your code...
 
 
 def main():
