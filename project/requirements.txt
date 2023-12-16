@@ -1,0 +1,6 @@
+kaggle
+os
+sqlalchemy
+pandas
+zipfile
+numpy
