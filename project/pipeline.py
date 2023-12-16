@@ -31,7 +31,8 @@ def load(df, table):
     with engine.connect() as connection:
         df.to_sql(table, connection, if_exists="replace")
       
-    
+    # I have changed "." in load function in both test.py and pipeline.py
+
 def download_kaggle_dataset(dataset, target_folder, filename):
     api = KaggleApi()
     api.authenticate()
