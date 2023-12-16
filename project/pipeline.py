@@ -40,6 +40,19 @@ def download_kaggle_dataset(dataset, target_folder, filename):
     api.dataset_download_files(f"{username}/{dataset_name}", path=target_folder, unzip=False)
     with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
         zip_ref.extract(filename, path=target_folder)
+    
+    # Check if 'Content-Length' header is present in the response
+    response = api.dataset_view(f"{username}/{dataset_name}")
+    content_length = response.headers.get('Content-Length')
+    
+    if content_length is not None:
+        size = int(content_length)
+        print(f"Downloaded {filename} ({size} bytes)")
+    else:
+        print(f"Unable to determine file size for {filename}.")
+
+# Rest of your code...
+
 
 def main():
     
