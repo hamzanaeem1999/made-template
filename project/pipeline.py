@@ -38,23 +38,13 @@ def download_kaggle_dataset(dataset, target_folder, filename):
     username, dataset_name = dataset.split('/')[-2:]
     zip_file_path = os.path.join(target_folder, f"{dataset_name}.zip")
 
-    # Print dataset information for debugging
-    print(f"Downloading dataset: {dataset}")
-
-    # Download files using Kaggle API
     api.dataset_download_files(f"{username}/{dataset_name}", path=target_folder, unzip=False)
 
-    # Extract the specified file from the downloaded ZIP archive
     with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
         zip_ref.extract(filename, path=target_folder)
 
     # Check 'Content-Length' header in the API response
     response = api.dataset_view(f"{username}/{dataset_name}")
-    
-    # Print response information for debugging
-    print("Response Status Code:", response.status_code)
-    print("Response Headers:", response.headers)
-    print("API Response Text:", response.text)
 
     # Attempt to access 'Content-Length' header and handle errors
     try:
