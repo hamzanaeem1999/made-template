@@ -33,7 +33,7 @@ jobs:
           pip install kaggle
           mkdir -p $HOME/.kaggle
           echo "$KAGGLE_TOKEN" > $HOME/.kaggle/kaggle.json
-          chmod 600 $HOME/.kaggle/kaggle.json
+          # chmod 600 $HOME/.kaggle/kaggle.json
           export KAGGLE_CONFIG_DIR=$HOME/.kaggle
 
 
