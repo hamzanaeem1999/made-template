@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      KAGGLE_USERNAME: hamzanaeem534
-      KAGGLE_KEY: 3cee859180d8b54a4a9e9f06177b5f26
+      KAGGLE_USERNAME: ${{ secrets.KAGGLE_TOKEN_USERNAME }}
+      KAGGLE_KEY: ${{ secrets.KAGGLE_TOKEN_KEY }}
 
     steps:
       - name: Checkout repository
