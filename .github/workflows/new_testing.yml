@@ -23,7 +23,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r project/requirements.txt
 
-
       - name: Run pipline.py
         run: python project/pipeline.py
         
