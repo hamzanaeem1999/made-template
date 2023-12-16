@@ -32,45 +32,15 @@ def load(df, table):
         df.to_sql(table, connection, if_exists="replace")
       
     
-# def download_kaggle_dataset(dataset, target_folder, filename):
-#     api = KaggleApi()
-#     api.authenticate()
-#     username, dataset_name = dataset.split('/')[-2:]
-#     zip_file_path = os.path.join(target_folder,f"{dataset_name}.zip")
-#     api.dataset_download_files(f"{username}/{dataset_name}", path=target_folder, unzip=False)
-#     with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
-#         zip_ref.extract(filename, path=target_folder)
-        
-import requests
-import requests
-from tqdm import tqdm  # For progress bar
-
 def download_kaggle_dataset(dataset, target_folder, filename):
-    print("directly.....", dataset)
     api = KaggleApi()
-    try:
-        api.authenticate()
-        print("Authentication successful.")
-    except Exception as e:
-        print(f"Authentication failed: {e}")
-        return  # Exit the function if authentication fails    print('api autheticate',api )
+    api.authenticate()
     username, dataset_name = dataset.split('/')[-2:]
-    print('user name , dataset name', username, dataset_name)
-    zip_file_path = os.path.join(target_folder, f"{dataset_name}.zip")
-    
-    # Download dataset files
-    files = api.dataset_download_files(f"{username}/{dataset_name}", path=target_folder, unzip=False)
-
-    try:
-        size = int(files.headers['Content-Length'])
-        print(f"Downloaded file size: {size} bytes")
-    except KeyError:
-        print("Content-Length header not found. File size information not available.")
-    
-    # Extract downloaded files
+    zip_file_path = os.path.join(target_folder,f"{dataset_name}.zip")
+    api.dataset_download_files(f"{username}/{dataset_name}", path=target_folder, unzip=False)
     with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
         zip_ref.extract(filename, path=target_folder)
-
+ 
 def main():
     
     script_dir = os.path.dirname(os.path.abspath(__file__))

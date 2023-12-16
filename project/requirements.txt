@@ -2,5 +2,3 @@ kaggle
 sqlalchemy
 pandas
 numpy
-requests==2.26.0
-tqdm==4.62.3
