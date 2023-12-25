@@ -29,7 +29,7 @@ def load(df, table):
     db_path = os.path.join(current_dir,".","data", "munich.sqlite")
     engine = create_engine(f"sqlite:///{db_path}")
     with engine.connect() as connection:
-        df.to_sql(table, connection, if_exists="replace")
+        df.to_sql(table, connection, if_exists="replace", index=False)
       
     # I have changed "." in load function in both test.py and pipeline.py
 
