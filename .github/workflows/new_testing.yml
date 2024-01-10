@@ -8,7 +8,6 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
     env:
       KAGGLE_USERNAME: hamzanaeem534
       KAGGLE_KEY: 3cee859180d8b54a4a9e9f06177b5f26
