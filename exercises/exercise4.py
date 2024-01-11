@@ -17,10 +17,8 @@ os.remove(zip_file_path)
 selected_columns = ["Geraet", "Hersteller", "Model", "Monat", "Temperatur in °C (DWD)",
                     "Batterietemperatur in °C", "Geraet aktiv"]
 
-# Reading and Rename columns for clarity
-df = pd.read_csv("data.csv", sep=";", decimal=",", index_col=False, usecols=selected_columns)
-
 # Rename columns for clarity
+df = pd.read_csv("data.csv", sep=";", decimal=",", index_col=False, usecols=selected_columns)
 column_mapping = {
     "Temperatur in °C (DWD)": "Temperatur",
     "Batterietemperatur in °C": "Batterietemperatur"
@@ -38,7 +36,7 @@ cursor = conn.cursor()
 # Create table
 create_table_query = """
 CREATE TABLE temperatures (
-    Geraet INTEGER,
+    Geraet BIGINT,
     Hersteller TEXT,
     Model TEXT,
     Monat TEXT,
