@@ -4,7 +4,8 @@ import sqlite3 as db
 import pandas as pd
 
 
-def dataExtraction(url):
+# Extracting the data
+def extraction_of_data(url):
     zip_filename = 'mowesta-dataset.zip'
     data_filename = 'data.csv'
     req.urlretrieve(url, zip_filename)
@@ -12,37 +13,32 @@ def dataExtraction(url):
         zip_ref.extractall()
     return data_filename
 
-
-def dataTransformer(filename):
+# Transforming the data
+def transformation_of_data(filename):
     dataFrame = pd.read_csv(filename, sep=";", decimal=",", index_col=False,
                             usecols=["Geraet", "Hersteller", "Model", "Monat", "Temperatur in °C (DWD)",
                                      "Batterietemperatur in °C", "Geraet aktiv"])
 
-    # Rename columns
-    dataFrame = dataFrame.rename(
-        columns={"Temperatur in °C (DWD)": "Temperatur", "Batterietemperatur in °C": "Batterietemperatur"})
-
-    # Discard columns
-    columns_to_keep = ["Geraet", "Hersteller", "Model", "Monat", "Temperatur", "Batterietemperatur", "Geraet aktiv"]
-    dataFrame = dataFrame[columns_to_keep]
-
-    # Celsius to Fahrenheit
+    # Conditions to be satisifed
+    dataFrame = dataFrame.rename(columns={"Temperatur in °C (DWD)": "Temperatur", "Batterietemperatur in °C": "Batterietemperatur"})
+    selected_columns = ["Geraet", "Hersteller", "Model", "Monat", "Temperatur", "Batterietemperatur", "Geraet aktiv"]
+    dataFrame = dataFrame[selected_columns]
     dataFrame['Temperatur'] = (dataFrame['Temperatur'] * 9 / 5) + 32
-
-    #  Celsius to Fahrenheit
     dataFrame['Batterietemperatur'] = (dataFrame['Batterietemperatur'] * 9 / 5) + 32
 
     return dataFrame
 
-
-def dataValidater(dataFrame):
-    dataFrame = dataFrame[dataFrame['Geraet'] > 0]
-    dataFrame = dataFrame[dataFrame['Hersteller'].astype(str).str.strip().ne("")]
-    dataFrame = dataFrame[dataFrame['Model'].astype(str).str.strip().ne("")]
-    dataFrame = dataFrame[dataFrame['Monat'].between(1, 12)]
-    dataFrame = dataFrame[pd.to_numeric(dataFrame['Temperatur'], errors='coerce').notnull()]
-    dataFrame = dataFrame[pd.to_numeric(dataFrame['Batterietemperatur'], errors='coerce').notnull()]
-    dataFrame = dataFrame[dataFrame['Geraet aktiv'].isin(['Ja', 'Nein'])]
+# Validation the data
+def validation_of_data(dataFrame):
+    dataFrame = (
+        dataFrame[dataFrame['Geraet'] > 0]
+        .loc[dataFrame['Hersteller'].astype(str).str.strip() != ""]
+        .loc[dataFrame['Model'].astype(str).str.strip() != ""]
+        .loc[dataFrame['Monat'].between(1, 12)]
+        .loc[pd.to_numeric(dataFrame['Temperatur'], errors='coerce').notnull()]
+        .loc[pd.to_numeric(dataFrame['Batterietemperatur'], errors='coerce').notnull()]
+        .loc[dataFrame['Geraet aktiv'].isin(['Ja', 'Nein'])]
+    )
     return dataFrame
 
 
@@ -68,9 +64,9 @@ def saveToDB(dataFrame, database_name, table_name):
 
 # Driver
 url = 'https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip'
-data_filename = dataExtraction(url)
-transformed_data = dataTransformer(data_filename)
-validated_data = dataValidater(transformed_data)
+data_filename = extraction_of_data(url)
+transformed_data = transformation_of_data(data_filename)
+validated_data = validation_of_data(transformed_data)
 database_name = 'temperatures.sqlite'
 table_name = 'temperatures'
 saveToDB(validated_data, database_name, table_name)
