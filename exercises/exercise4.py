@@ -20,12 +20,6 @@ selected_columns = ["Geraet", "Hersteller", "Model", "Monat", "Temperatur in °C
 # Reading and Rename columns for clarity
 df = pd.read_csv("data.csv", sep=";", decimal=",", index_col=False, usecols=selected_columns)
 
-# Discard columns to the right of 'Geraet aktiv'
-column_to_discard = "Geraet aktiv"
-if column_to_discard in df.columns:
-    discard_index = df.columns.get_loc(column_to_discard)
-    df = df.iloc[:, :discard_index + 1]
-
 # Rename columns for clarity
 column_mapping = {
     "Temperatur in °C (DWD)": "Temperatur",
