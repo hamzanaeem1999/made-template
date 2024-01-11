@@ -41,7 +41,6 @@ def validation_of_data(dataFrame):
     )
     return dataFrame
 
-
 def saveToDB(dataFrame, database_name, table_name):
     conn = db.connect(database_name)
     cursor = conn.cursor()
