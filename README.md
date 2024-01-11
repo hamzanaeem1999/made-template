@@ -16,7 +16,7 @@ Analysis of Weather Patterns and Biking Trends in Munich (2020).
 4. How Cyclists and Weather has been correlated to each other ?.
 5. How does the average temperature influence bike usage in Munich on a monthly basis?
    
-I invite you to explore the insights and conclusions drawn from this comprehensive analysis [1](https://github.com/hamzanaeem1999/made-template/blob/main/project/report.ipynb). The detailed findings and recommendations are presented in the report, which is an invaluable resource for anyone interested in urban mobility, environmental sustainability, and the promotion of cycling in urban settings.
+I invite you to explore the insights and conclusions drawn from this comprehensive analysis [[1]](https://github.com/hamzanaeem1999/made-template/blob/main/project/report.ipynb). The detailed findings and recommendations are presented in the report, which is an invaluable resource for anyone interested in urban mobility, environmental sustainability, and the promotion of cycling in urban settings.
 
 
 ### Exporting a Jupyter Notebook
