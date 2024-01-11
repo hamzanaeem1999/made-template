@@ -6,7 +6,18 @@ Before you begin, make sure you have [Python](https://www.python.org/) and [Jayv
 
 
 ## Project Work
-Your data engineering project will run alongside lectures during the semester. We will ask you to regularly submit project work as milestones so you can reasonably pace your work. All project work submissions **must** be placed in the `project` folder.
+In a city where biking is a way of life, understanding the impact of weather on cycling habits is crucial. I have focused on unraveling the complex relationship between weather conditions and bike usage in Munich. This endeavor was aimed at enhancing urban mobility strategies and promoting environmental sustainability through increased bicycle usage.Throughout this project, I have delved into the following key areas:
+
+Analysis of Weather Patterns and Biking Trends in Munich (2020).
+
+1. Investigating how different weather conditions throughout the year influenced cycling habits ?.
+2. Understanding weekly variations in bike usage in relation to weather changes ?.
+3. How does the frequency of biking change during specific seasons in 2020?
+4. How Cyclists and Weather has been correlated to each other ?.
+5. How does the average temperature influence bike usage in Munich on a monthly basis?
+   
+I invite you to explore the insights and conclusions drawn from this comprehensive analysis [1](https://github.com/hamzanaeem1999/made-template/blob/main/project/report.ipynb). The detailed findings and recommendations are presented in the report, which is an invaluable resource for anyone interested in urban mobility, environmental sustainability, and the promotion of cycling in urban settings.
+
 
 ### Exporting a Jupyter Notebook
 Jupyter Notebooks can be exported using `nbconvert` (`pip install nbconvert`). For example, to export the example notebook to html: `jupyter nbconvert --to html examples/final-report-example.ipynb --embed-images --output final-report.html`
